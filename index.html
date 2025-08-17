@@ -1,141 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>ZBook</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      margin: 0; 
-      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed; 
-      background-size: cover; 
-    }
-    header { 
-      background: rgba(24,119,242,0.95); 
-      color: #fff; 
-      padding: 10px 20px; 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      flex-wrap: wrap;
-    }
-    header h1 { margin: 0; font-size: 22px; }
-    .menu button { 
-      background: #fff; 
-      color: #1877f2; 
-      border: none; 
-      padding: 6px 12px; 
-      border-radius: 5px; 
-      cursor: pointer; 
-    }
-    .login-box, .post-box, .feed, .users { 
-      background: rgba(255,255,255,0.9); 
-      padding: 15px; 
-      margin: 20px auto; 
-      border-radius: 10px; 
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-      max-width: 600px; 
-      width: 95%;
-    }
-    input, textarea { 
-      display: block; 
-      margin: 10px auto; 
-      width: 100%; 
-      padding: 10px; 
-      border-radius: 5px; 
-      border: 1px solid #ccc; 
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-    button { 
-      display: block; 
-      margin: 10px auto; 
-      padding: 10px; 
-      border-radius: 5px; 
-      border: none; 
-      cursor: pointer; 
-      background: #1877f2; 
-      color: #fff; 
-      font-size: 16px;
-      width: auto;
-      min-width: 100px;
-    }
-    textarea { resize: none; }
-    .post { 
-      background: #f1f1f1; 
-      padding: 10px; 
-      margin: 10px 0; 
-      border-radius: 8px; 
-      word-wrap: break-word;
-    }
-    .own { border-left: 5px solid #1877f2; }
-    .users { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fill,minmax(100px,1fr)); 
-      gap: 10px; 
-    }
-    .user-tile { 
-      background: #e3e3ff; 
-      padding: 10px; 
-      border-radius: 8px; 
-      text-align: center; 
-      cursor: pointer; 
-      transition: all 0.3s ease; 
-      font-size: 14px;
-    }
-    .user-tile:hover { background: #d0d0ff; }
-    .active-user { 
-      background: linear-gradient(135deg, #2196f3, #42a5f5); 
-      color: white; 
-      font-weight: bold; 
-      border: 2px solid #1565c0; 
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3); 
-    }
-    .active-user::after { 
-      content: " (You)"; 
-      font-size: 12px; 
-      font-weight: normal; 
-      color: #fffde7; 
-    }
-    .actions { text-align: right; }
-    .actions button { 
-      margin-left: 5px; 
-      width: auto; 
-      display: inline-block; 
-      padding: 5px 10px; 
-      font-size: 14px;
-      background: #1877f2;
-      color: #fff;
-    }
-    .timestamp { 
-      font-size: 12px; 
-      color: #555; 
-      margin-top: 5px; 
-      display: block; 
-    }
-    .back-btn { 
-      background: #1877f2; 
-      color: #fff; 
-      border: none; 
-      padding: 6px 12px; 
-      border-radius: 6px; 
-      cursor: pointer; 
-      font-size: 14px;
-    }
+<meta charset="UTF-8">
+<title>ZBook</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body { 
+  font-family: Arial, sans-serif; 
+  margin: 0; 
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed; 
+  background-size: cover; 
+}
+header { 
+  background: rgba(24,119,242,0.95); 
+  color: #fff; 
+  padding: 10px 20px; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+header h1 { 
+  margin: 0; 
+  font-size: 22px; 
+}
+/* --- COMPACT LOGIN/LOGOUT BAR --- */
+.menu {
+  flex: 0 0 120px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 80px;
+}
+.menu button { 
+  background: #fff; 
+  color: #1877f2; 
+  border: none; 
+  padding: 6px 10px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 15px;
+}
+.login-box, .post-box, .feed, .users { 
+  background: rgba(255,255,255,0.9); 
+  padding: 15px; 
+  margin: 20px auto; 
+  border-radius: 10px; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+  max-width: 600px; 
+}
+input, textarea, button { 
+  display: block; 
+  margin: 10px auto; 
+  width: 90%; 
+  padding: 8px; 
+  border-radius: 5px; 
+  border: 1px solid #ccc; 
+}
+textarea { 
+  resize: none; 
+}
+.post { 
+  background: #f1f1f1; 
+  padding: 10px; 
+  margin: 10px 0; 
+  border-radius: 8px; 
+}
+.own { 
+  border-left: 5px solid #1877f2; 
+}
+.users { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill,minmax(100px,1fr)); 
+  gap: 10px; 
+}
+/* --- UNIFIED USER TILE SIZE --- */
+.user-tile { 
+  width: 100px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e3e3ff; 
+  border-radius: 8px; 
+  text-align: center; 
+  cursor: pointer; 
+  transition: all 0.3s ease; 
+  box-sizing: border-box;
+  font-size: 16px;
+  margin: 0 auto;
+  padding: 0;
+}
+.user-tile:hover { 
+  background: #d0d0ff; 
+}
+.active-user { 
+  background: linear-gradient(135deg, #2196f3, #42a5f5); 
+  color: white; 
+  font-weight: bold; 
+  border: 2px solid #1565c0; 
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3); 
+}
+.active-user::after { 
+  content: " (You)"; 
+  font-size: 12px; 
+  font-weight: normal; 
+  color: #fffde7; 
+}
+.actions { 
+  text-align: right; 
+}
+.actions button { 
+  margin-left: 5px; 
+}
+.timestamp { 
+  font-size: 12px; 
+  color: #555; 
+  margin-top: 5px; 
+  display: block; 
+}
+.back-btn { 
+  background: #1877f2; 
+  color: #fff; 
+  border: none; 
+  padding: 6px 12px; 
+  border-radius: 6px; 
+  cursor: pointer; 
+}
 
-    /* Mobile tweaks */
-    @media (max-width: 600px) {
-      header { flex-direction: column; align-items: flex-start; }
-      header h1 { font-size: 18px; margin-bottom: 8px; }
-      .menu button { width: 100%; margin-top: 5px; }
-      .users { grid-template-columns: repeat(auto-fill, minmax(80px,1fr)); }
-      input, textarea { font-size: 14px; }
-      .post { font-size: 14px; }
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 700px) {
+  .login-box, .post-box, .feed, .users {
+    max-width: 98vw;
+    margin: 10px 2vw;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 8px;
+  }
+  header h1 {
+    font-size: 18px;
+    margin-bottom: 7px;
+  }
+  .menu {
+    flex: 0 0 90px;
+    min-width: 60px;
+    width: auto;
+    justify-content: flex-end;
+  }
+  input, textarea, button {
+    width: 98%;
+    font-size: 16px;
+    padding: 10px;
+  }
+  .users {
+    grid-template-columns: repeat(auto-fill,minmax(70px,1fr));
+    gap: 7px;
+    padding: 5px 0;
+  }
+  /* UNIFIED TILE SIZE FOR MOBILE */
+  .user-tile {
+    width: 70px;
+    height: 32px;
+    font-size: 14px;
+    padding: 0;
+  }
+  .post {
+    padding: 7px;
+    font-size: 15px;
+  }
+  .actions button, .back-btn {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+  h2, .feed h2 {
+    font-size: 19px;
+  }
+}
+/* Extra small screens */
+@media (max-width: 420px) {
+  header h1 {
+    font-size: 15px;
+  }
+  .menu {
+    flex: 0 0 60px;
+    min-width: 40px;
+  }
+  .user-tile {
+    width: 55px;
+    height: 24px;
+    font-size: 12px;
+    padding: 0;
+  }
+  h2, .feed h2 {
+    font-size: 16px;
+  }
+  .timestamp {
+    font-size: 11px;
+  }
+  input, textarea, button {
+    font-size: 13px;
+    padding: 7px;
+  }
+}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://acwacaljpzipqgpqkbnk.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFjd2FjYWxqcHppcHFncHFrYm5rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU0MzkxOTUsImV4cCI6MjA3MTAxNTE5NX0.kvxlmLH9mmN13Z-HZGMJ_chHZXHqlOQajk4qRB1QjWk";
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let currentUser = null;
+let filterUser = null;
+
+function showLogin() {
+  document.getElementById("loginBox").style.display="block";
+}
+
+async function login() {
+  const u = document.getElementById("userId").value.trim();
+  const p = document.getElementById("password").value.trim();
+
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("id", u)
+    .eq("password", p)
+    .single();
+
+  if (error) {
+    console.error("Login error:", error);
+    document.getElementById("loginError").innerText="Invalid login!";
+    return;
+  }
+
+  if (data) {
+    currentUser = data.id;
+    document.getElementById("loginBox").style.display="none";
+    document.getElementById("app").style.display="block";
+    document.getElementById("currentUser").innerText=currentUser;
+    document.getElementById("menuBox").innerHTML =
+      `<span>${currentUser}</span> <button onclick="logout()">Logout</button>`;
+    renderUsers();
+    loadPosts();
+  } else {
+    document.getElementById("loginError").innerText="Invalid login!";
+  }
+}
+
+function logout() {
+  currentUser = null;
+  filterUser = null;
+  document.getElementById("app").style.display="none";
+  document.getElementById("loginBox").style.display="none";
+  document.getElementById("menuBox").innerHTML = `<button onclick="showLogin()">Login</button>`;
+}
+
+async function renderUsers() {
+  const { data: users } = await supabase.from("users").select("*");
+  const container = document.getElementById("usersList");
+  container.innerHTML="";
+  users.forEach(u=>{
+    const div=document.createElement("div");
+    div.className="user-tile";
+    if(currentUser === u.id) div.classList.add("active-user");
+    div.innerText=u.id;
+    div.onclick = ()=>{ filterByUser(u.id); };
+    container.appendChild(div);
+  });
+}
+
+function filterByUser(username) {
+  filterUser = username;
+  document.getElementById("feedTitle").innerText = username+"'s Posts";
+  document.getElementById("backBtnContainer").innerHTML =
+    `<button class="back-btn" onclick="backToFeed()">← Back to Feed</button>`;
+  loadPosts();
+}
+
+function backToFeed() {
+  filterUser = null;
+  document.getElementById("feedTitle").innerText = "Feed";
+  document.getElementById("backBtnContainer").innerHTML = "";
+  loadPosts();
+}
+
+async function addPost() {
+  const txt=document.getElementById("newPost").value.trim();
+  if(txt.length===0) return;
+
+  const { error } = await supabase.from("posts").insert([
+    { user: currentUser, text: txt, time: new Date().toISOString() }
+  ]);
+
+  if (error) {
+    console.error("Post insert error:", error);
+    return;
+  }
+
+  document.getElementById("newPost").value="";
+  backToFeed();
+}
+
+async function loadPosts() {
+  let query = supabase.from("posts").select("*").order("time", { ascending: false });
+  if(filterUser) query = query.eq("user", filterUser);
+
+  const { data: posts, error } = await query;
+  if (error) { console.error("Load posts error:", error); return; }
+
+  const container=document.getElementById("posts");
+  container.innerHTML="";
+  posts.forEach(post=>{
+    const div=document.createElement("div");
+    div.className="post"+(post.user===currentUser?" own":"");
+    div.innerHTML=
+      `<b>${post.user}</b>: ${post.text}<br> <span class="timestamp">Posted on: ${post.time?new Date(post.time).toLocaleString():"(no time)"}</span>`;
+    if(post.user===currentUser) {
+      const act=document.createElement("div");
+      act.className="actions";
+      act.innerHTML=
+        `<button onclick="editPost('${post.id}')">Edit</button> <button onclick="deletePost('${post.id}')">Delete</button>`;
+      div.appendChild(act);
     }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <!-- your original JS untouched -->
+    container.appendChild(div);
+  });
+}
+
+async function editPost(id) {
+  const { data: post } = await supabase.from("posts").select("*").eq("id", id).single();
+  const newText=prompt("Edit your post:",post.text);
+  if(newText!==null && newText.trim()!=="") {
+    await supabase.from("posts").update({ text: newText.trim() }).eq("id", id);
+    loadPosts();
+  }
+}
+
+async function deletePost(id) {
+  await supabase.from("posts").delete().eq("id", id);
+  loadPosts();
+}
+</script>
 </head>
 <body>
 <header>
