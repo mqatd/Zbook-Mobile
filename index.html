@@ -17,7 +17,7 @@ header {
   padding: 10px 20px; 
   display: flex; 
   justify-content: space-between; 
-  align-items: center;
+  align-items: center; 
 }
 header h1 { 
   margin: 0; 
@@ -46,9 +46,7 @@ header h1 {
   margin: 20px auto; 
   border-radius: 10px; 
   box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
+  max-width: 600px; 
 }
 input, textarea, button { 
   display: block; 
@@ -132,8 +130,8 @@ textarea {
 /* --- MOBILE RESPONSIVE --- */
 @media (max-width: 700px) {
   .login-box, .post-box, .feed, .users {
-    width: 100%;
-    margin: 10px 0;
+    max-width: 98vw;
+    margin: 10px 2vw;
     padding: 10px;
     border-radius: 8px;
   }
@@ -207,69 +205,6 @@ textarea {
     padding: 7px;
   }
 }
-
-/* --- DARK THEME --- */
-body {
-  background: #121212 url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') 
-              no-repeat center center fixed;
-  background-size: cover;
-  color: #e0e0e0;
-}
-
-.login-box, .post-box, .feed, .users {
-  background: rgba(30,30,30,0.9);
-  color: #e0e0e0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
-}
-
-.post {
-  background: #1e1e1e;
-  color: #ddd;
-}
-
-.own {
-  border-left: 5px solid #42a5f5;
-}
-
-.user-tile {
-  background: #2a2a2a;
-  color: #eee;
-}
-.user-tile:hover {
-  background: #3a3a3a;
-}
-.active-user {
-  background: linear-gradient(135deg, #1565c0, #42a5f5);
-  border: 2px solid #90caf9;
-}
-
-input, textarea {
-  background: #222;
-  color: #eee;
-  border: 1px solid #555;
-}
-button {
-  background: #1877f2;
-  color: #fff;
-}
-button:hover {
-  background: #0f5dc8;
-}
-
-.timestamp {
-  color: #aaa;
-}
-
-
-
-
-
-
-
-
-
-
-
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
