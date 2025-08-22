@@ -59,6 +59,21 @@ input, textarea, button {
 textarea { 
   resize: none; 
 }
+
+/* --- RESPONSIVE IMAGE STYLES --- */
+.image-container {
+  text-align: center;
+  margin: 20px 0;
+}
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: block;
+  margin: 0 auto;
+}
+
 .post { 
   background: #f1f1f1; 
   padding: 10px; 
@@ -178,6 +193,14 @@ textarea {
   h2, .feed h2 {
     font-size: 19px;
   }
+  
+  /* Mobile responsive image adjustments */
+  .image-container {
+    margin: 15px 0;
+  }
+  .image-container img {
+    border-radius: 8px;
+  }
 }
 /* Extra small screens */
 @media (max-width: 420px) {
@@ -203,6 +226,14 @@ textarea {
   input, textarea, button {
     font-size: 13px;
     padding: 7px;
+  }
+  
+  /* Extra small screen image adjustments */
+  .image-container {
+    margin: 10px 0;
+  }
+  .image-container img {
+    border-radius: 6px;
   }
 }
 
@@ -361,23 +392,18 @@ async function deletePost(id) {
   <p style="color:red;" id="loginError"></p>
 </div>
 
-
-
 <div id="app" style="display:none;">
   <h2 style="text-align:center;">Welcome, <span id="currentUser"></span>!</h2>
 
-<p><c> 
-  <img src="img2.png"></img></c>
-  </p>
-
+  <div class="image-container">
+    <img src="img2.png" alt="ZBook Image">
+  </div>
 
   <div class="users" id="usersList"></div>
   <div class="post-box">
     <textarea id="newPost" maxlength="1400" placeholder="Write your post (max 1400 chars)..."></textarea>
     <button onclick="addPost()">Post</button>
   </div>
-
-
   
   <div class="feed">
     <h2 id="feedTitle">Feed</h2>
