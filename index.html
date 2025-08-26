@@ -5,238 +5,439 @@
 <title>ZBook</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body { 
-  font-family: Arial, sans-serif; 
-  margin: 0; 
-  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed; 
-  background-size: cover; 
+* {
+  box-sizing: border-box;
 }
+
+body { 
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0; 
+  background: linear-gradient(135deg, #1877f2 0%, #42a5f5 100%);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Header */
 header { 
-  background: rgba(24,119,242,0.95); 
-  color: #fff; 
-  padding: 10px 20px; 
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding: 1rem 2rem;
   display: flex; 
   justify-content: space-between; 
-  align-items: center; 
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
+
 header h1 { 
   margin: 0; 
-  font-size: 22px; 
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  letter-spacing: -0.5px;
 }
-/* --- COMPACT LOGIN/LOGOUT BAR --- */
+
 .menu {
-  flex: 0 0 120px;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  min-width: 80px;
+  gap: 1rem;
 }
+
+.menu span {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
 .menu button { 
-  background: #fff; 
-  color: #1877f2; 
+  background: linear-gradient(135deg, #1877f2, #42a5f5);
+  color: white;
   border: none; 
-  padding: 6px 10px; 
-  border-radius: 5px; 
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
   cursor: pointer; 
-  font-size: 15px;
-}
-.login-box, .post-box, .feed, .users { 
-  background: rgba(255,255,255,0.9); 
-  padding: 15px; 
-  margin: 20px auto; 
-  border-radius: 10px; 
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-  max-width: 600px; 
-}
-input, textarea, button { 
-  display: block; 
-  margin: 10px auto; 
-  width: 90%; 
-  padding: 8px; 
-  border-radius: 5px; 
-  border: 1px solid #ccc; 
-}
-textarea { 
-  resize: none; 
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* --- RESPONSIVE IMAGE STYLES --- */
-.image-container {
-  text-align: center;
-  margin: 20px 0;
+.menu button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
-.image-container img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  display: block;
+
+/* Container for main content */
+.container {
+  max-width: 800px;
   margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-.post { 
-  background: #f1f1f1; 
-  padding: 10px; 
-  margin: 10px 0; 
-  border-radius: 8px; 
+/* Cards */
+.card { 
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
 }
-.own { 
-  border-left: 5px solid #1877f2; 
+
+.login-box {
+  max-width: 400px;
+  margin: 4rem auto;
 }
+
+.login-box h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+/* Welcome section */
+.welcome {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.welcome h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.welcome-image {
+  margin: 1.5rem 0;
+}
+
+.welcome-image img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+/* Users section */
+.users-section h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
 .users { 
   display: grid; 
-  grid-template-columns: repeat(auto-fill,minmax(100px,1fr)); 
-  gap: 10px; 
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
-/* --- UNIFIED USER TILE SIZE --- */
+
 .user-tile { 
-  width: 100px;
-  height: 40px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #e3e3ff; 
-  border-radius: 8px; 
-  text-align: center; 
-  cursor: pointer; 
-  transition: all 0.3s ease; 
-  box-sizing: border-box;
-  font-size: 16px;
-  margin: 0 auto;
-  padding: 0;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #495057;
 }
+
 .user-tile:hover { 
-  background: #d0d0ff; 
+  background: #e3f2fd;
+  border-color: #1877f2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.2);
 }
+
 .active-user { 
-  background: linear-gradient(135deg, #2196f3, #42a5f5); 
-  color: white; 
-  font-weight: bold; 
-  border: 2px solid #1565c0; 
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3); 
+  background: linear-gradient(135deg, #1877f2, #42a5f5);
+  color: white;
+  border-color: #166fe5;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
 }
+
 .active-user::after { 
   content: " (You)"; 
-  font-size: 12px; 
-  font-weight: normal; 
-  color: #fffde7; 
-}
-.actions { 
-  text-align: right; 
-}
-.actions button { 
-  margin-left: 5px; 
-}
-.timestamp { 
-  font-size: 12px; 
-  color: #555; 
-  margin-top: 5px; 
-  display: block; 
-}
-.back-btn { 
-  background: #1877f2; 
-  color: #fff; 
-  border: none; 
-  padding: 6px 12px; 
-  border-radius: 6px; 
-  cursor: pointer; 
+  font-size: 0.75rem;
+  opacity: 0.9;
 }
 
-/* --- MOBILE RESPONSIVE --- */
-@media (max-width: 700px) {
-  .login-box, .post-box, .feed, .users {
-    max-width: 98vw;
-    margin: 10px 2vw;
-    padding: 10px;
-    border-radius: 8px;
+/* Post creation */
+.post-creation h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Form elements */
+input, textarea, button { 
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #1877f2;
+  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
+}
+
+textarea { 
+  resize: vertical;
+  min-height: 100px;
+  margin-bottom: 1rem;
+}
+
+button {
+  background: linear-gradient(135deg, #1877f2, #42a5f5);
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Feed section */
+.feed h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-btn { 
+  background: #6c757d;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-btn:hover {
+  background: #5a6268;
+}
+
+/* Posts */
+.posts-container {
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.posts-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.posts-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.posts-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.post { 
+  background: #f8f9fa;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  border-left: 4px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.post:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.own { 
+  border-left-color: #1877f2;
+  background: linear-gradient(135deg, rgba(24, 119, 242, 0.1), rgba(66, 165, 245, 0.1));
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.post-author {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.post-content {
+  color: #495057;
+  margin-bottom: 0.75rem;
+  word-break: break-word;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timestamp { 
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actions button { 
+  width: auto;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: 6px;
+}
+
+.actions .edit-btn {
+  background: #28a745;
+}
+
+.actions .edit-btn:hover {
+  background: #218838;
+}
+
+.actions .delete-btn {
+  background: #dc3545;
+}
+
+.actions .delete-btn:hover {
+  background: #c82333;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Empty states */
+.empty-state {
+  text-align: center;
+  color: #6c757d;
+  padding: 2rem;
+  font-style: italic;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 0.5rem;
   }
+  
   header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: static;
+  }
+  
+  header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .menu {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+  }
+  
+  .users {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 0.5rem;
+  }
+  
+  .user-tile {
+    height: 40px;
+    font-size: 0.8rem;
+  }
+  
+  .welcome-image img {
+    max-width: 250px;
+  }
+  
+  .feed h3 {
     flex-direction: column;
     align-items: flex-start;
-    padding: 12px 8px;
-  }
-  header h1 {
-    font-size: 18px;
-    margin-bottom: 7px;
-  }
-  .menu {
-    flex: 0 0 90px;
-    min-width: 60px;
-    width: auto;
-    justify-content: flex-end;
-  }
-  input, textarea, button {
-    width: 98%;
-    font-size: 16px;
-    padding: 10px;
-  }
-  .users {
-    grid-template-columns: repeat(auto-fill,minmax(70px,1fr));
-    gap: 7px;
-    padding: 5px 0;
-  }
-  /* UNIFIED TILE SIZE FOR MOBILE */
-  .user-tile {
-    width: 70px;
-    height: 32px;
-    font-size: 14px;
-    padding: 0;
-  }
-  .post {
-    padding: 7px;
-    font-size: 15px;
-  }
-  .actions button, .back-btn {
-    padding: 5px 10px;
-    font-size: 13px;
-  }
-  h2, .feed h2 {
-    font-size: 19px;
+    gap: 0.5rem;
   }
   
-  /* Mobile responsive image adjustments */
-  .image-container {
-    margin: 15px 0;
-  }
-  .image-container img {
-    border-radius: 8px;
-  }
-}
-/* Extra small screens */
-@media (max-width: 420px) {
-  header h1 {
-    font-size: 15px;
-  }
-  .menu {
-    flex: 0 0 60px;
-    min-width: 40px;
-  }
-  .user-tile {
-    width: 55px;
-    height: 24px;
-    font-size: 12px;
-    padding: 0;
-  }
-  h2, .feed h2 {
-    font-size: 16px;
-  }
-  .timestamp {
-    font-size: 11px;
-  }
-  input, textarea, button {
-    font-size: 13px;
-    padding: 7px;
+  .posts-container {
+    max-height: 500px;
   }
   
-  /* Extra small screen image adjustments */
-  .image-container {
-    margin: 10px 0;
+  .post-header {
+    flex-direction: column;
+    gap: 0.25rem;
   }
-  .image-container img {
-    border-radius: 6px;
+  
+  .post-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 }
 
+@media (max-width: 480px) {
+  .users {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  }
+  
+  .user-tile {
+    height: 35px;
+    font-size: 0.75rem;
+  }
+  
+  .welcome-image img {
+    max-width: 200px;
+  }
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -255,6 +456,11 @@ async function login() {
   const u = document.getElementById("userId").value.trim();
   const p = document.getElementById("password").value.trim();
 
+  if (!u || !p) {
+    document.getElementById("loginError").innerText = "Please enter both User ID and Password";
+    return;
+  }
+
   const { data, error } = await supabase
     .from("users")
     .select("*")
@@ -264,7 +470,7 @@ async function login() {
 
   if (error) {
     console.error("Login error:", error);
-    document.getElementById("loginError").innerText="Invalid login!";
+    document.getElementById("loginError").innerText="Invalid login credentials!";
     return;
   }
 
@@ -274,11 +480,11 @@ async function login() {
     document.getElementById("app").style.display="block";
     document.getElementById("currentUser").innerText=currentUser;
     document.getElementById("menuBox").innerHTML =
-      `<span>${currentUser}</span> <button onclick="logout()">Logout</button>`;
+      `<span>Welcome, ${currentUser}</span> <button onclick="logout()">Logout</button>`;
     renderUsers();
     loadPosts();
   } else {
-    document.getElementById("loginError").innerText="Invalid login!";
+    document.getElementById("loginError").innerText="Invalid login credentials!";
   }
 }
 
@@ -294,6 +500,12 @@ async function renderUsers() {
   const { data: users } = await supabase.from("users").select("*");
   const container = document.getElementById("usersList");
   container.innerHTML="";
+  
+  if (!users || users.length === 0) {
+    container.innerHTML = '<div class="empty-state">No users found</div>';
+    return;
+  }
+  
   users.forEach(u=>{
     const div=document.createElement("div");
     div.className="user-tile";
@@ -306,22 +518,23 @@ async function renderUsers() {
 
 function filterByUser(username) {
   filterUser = username;
-  document.getElementById("feedTitle").innerText = username+"'s Posts";
-  document.getElementById("backBtnContainer").innerHTML =
-    `<button class="back-btn" onclick="backToFeed()">← Back to Feed</button>`;
+  document.getElementById("feedTitle").innerHTML = 
+    `${username}'s Posts <button class="back-btn" onclick="backToFeed()">← Back to Feed</button>`;
   loadPosts();
 }
 
 function backToFeed() {
   filterUser = null;
-  document.getElementById("feedTitle").innerText = "Feed";
-  document.getElementById("backBtnContainer").innerHTML = "";
+  document.getElementById("feedTitle").innerHTML = "Recent Posts";
   loadPosts();
 }
 
 async function addPost() {
   const txt=document.getElementById("newPost").value.trim();
-  if(txt.length===0) return;
+  if(txt.length===0) {
+    alert("Please write something before posting!");
+    return;
+  }
 
   const { error } = await supabase.from("posts").insert([
     { user: currentUser, text: txt, time: new Date().toISOString() }
@@ -329,6 +542,7 @@ async function addPost() {
 
   if (error) {
     console.error("Post insert error:", error);
+    alert("Error posting your message. Please try again.");
     return;
   }
 
@@ -337,26 +551,96 @@ async function addPost() {
 }
 
 async function loadPosts() {
-  let query = supabase.from("posts").select("*").order("time", { ascending: false });
+  // Try multiple sorting methods to catch all posts
+  let query = supabase.from("posts").select("*");
+  
+  // First try sorting by time, then by id as fallback
+  try {
+    query = query.order("time", { ascending: false });
+  } catch (e) {
+    console.log("Time sorting failed, trying id sorting:", e);
+    query = query.order("id", { ascending: false });
+  }
+  
   if(filterUser) query = query.eq("user", filterUser);
 
   const { data: posts, error } = await query;
-  if (error) { console.error("Load posts error:", error); return; }
-
-  const container=document.getElementById("posts");
-  container.innerHTML="";
-  posts.forEach(post=>{
-    const div=document.createElement("div");
-    div.className="post"+(post.user===currentUser?" own":"");
-    div.innerHTML=
-      `<b>${post.user}</b>: ${post.text}<br> <span class="timestamp">Posted on: ${post.time?new Date(post.time).toLocaleString():"(no time)"}</span>`;
-    if(post.user===currentUser) {
-      const act=document.createElement("div");
-      act.className="actions";
-      act.innerHTML=
-        `<button onclick="editPost('${post.id}')">Edit</button> <button onclick="deletePost('${post.id}')">Delete</button>`;
-      div.appendChild(act);
+  if (error) { 
+    console.error("Load posts error:", error);
+    // Try a simpler query without ordering as fallback
+    const { data: fallbackPosts } = await supabase.from("posts").select("*");
+    if (fallbackPosts) {
+      renderPosts(fallbackPosts.reverse()); // Show newest first
+      return;
     }
+    return; 
+  }
+
+  console.log("Loaded posts:", posts); // Debug log to see what we got
+  renderPosts(posts || []);
+}
+
+function renderPosts(posts) {
+  const container = document.getElementById("posts");
+  container.innerHTML = "";
+  
+  if (!posts || posts.length === 0) {
+    container.innerHTML = '<div class="empty-state">No posts yet. Be the first to share something!</div>';
+    return;
+  }
+  
+  console.log(`Rendering ${posts.length} posts`); // Debug log
+  
+  posts.forEach((post, index) => {
+    const div = document.createElement("div");
+    div.className = "post" + (post.user === currentUser ? " own" : "");
+    
+    const postHeader = document.createElement("div");
+    postHeader.className = "post-header";
+    postHeader.innerHTML = `<span class="post-author">${post.user || 'Unknown User'}</span>`;
+    
+    const postContent = document.createElement("div");
+    postContent.className = "post-content";
+    postContent.textContent = post.text || '(No content)';
+    
+    const postFooter = document.createElement("div");
+    postFooter.className = "post-footer";
+    
+    const timestamp = document.createElement("span");
+    timestamp.className = "timestamp";
+    
+    // Handle different date formats that might exist
+    let displayTime = "(no time)";
+    if (post.time) {
+      try {
+        displayTime = new Date(post.time).toLocaleString();
+      } catch (e) {
+        displayTime = post.time; // Use original if parsing fails
+      }
+    } else if (post.created_at) {
+      try {
+        displayTime = new Date(post.created_at).toLocaleString();
+      } catch (e) {
+        displayTime = post.created_at;
+      }
+    }
+    
+    timestamp.textContent = displayTime;
+    postFooter.appendChild(timestamp);
+    
+    if (post.user === currentUser) {
+      const actions = document.createElement("div");
+      actions.className = "actions";
+      actions.innerHTML = `
+        <button class="edit-btn" onclick="editPost('${post.id}')">Edit</button>
+        <button class="delete-btn" onclick="deletePost('${post.id}')">Delete</button>
+      `;
+      postFooter.appendChild(actions);
+    }
+    
+    div.appendChild(postHeader);
+    div.appendChild(postContent);
+    div.appendChild(postFooter);
     container.appendChild(div);
   });
 }
@@ -371,9 +655,26 @@ async function editPost(id) {
 }
 
 async function deletePost(id) {
-  await supabase.from("posts").delete().eq("id", id);
-  loadPosts();
+  if (confirm("Are you sure you want to delete this post?")) {
+    await supabase.from("posts").delete().eq("id", id);
+    loadPosts();
+  }
 }
+
+// Allow Enter key to submit forms
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('password').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      login();
+    }
+  });
+  
+  document.getElementById('newPost').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && e.ctrlKey) {
+      addPost();
+    }
+  });
+});
 </script>
 </head>
 <body>
@@ -384,31 +685,40 @@ async function deletePost(id) {
   </div>
 </header>
 
-<div class="login-box" id="loginBox" style="display:none;">
-  <h2>Login</h2>
-  <input type="text" id="userId" placeholder="User ID">
-  <input type="password" id="password" placeholder="Password">
+<div class="login-box card" id="loginBox" style="display:none;">
+  <h2>Welcome to ZBook</h2>
+  <input type="text" id="userId" placeholder="Enter your User ID">
+  <input type="password" id="password" placeholder="Enter your Password">
   <button onclick="login()">Login</button>
-  <p style="color:red;" id="loginError"></p>
+  <p class="error-message" id="loginError"></p>
 </div>
 
 <div id="app" style="display:none;">
-  <h2 style="text-align:center;">Welcome, <span id="currentUser"></span>!</h2>
+  <div class="container">
+    <div class="welcome card">
+      <h2>Welcome to ZBook, <span id="currentUser"></span>!</h2>
+      <div class="welcome-image">
+        <img src="img2.png" alt="ZBook Community">
+      </div>
+    </div>
 
-  <div class="image-container">
-    <img src="img2.png" alt="ZBook Image">
-  </div>
+    <div class="card users-section">
+      <h3>Community Members</h3>
+      <div class="users" id="usersList"></div>
+    </div>
 
-  <div class="users" id="usersList"></div>
-  <div class="post-box">
-    <textarea id="newPost" maxlength="1400" placeholder="Write your post (max 1400 chars)..."></textarea>
-    <button onclick="addPost()">Post</button>
-  </div>
-  
-  <div class="feed">
-    <h2 id="feedTitle">Feed</h2>
-    <div id="backBtnContainer"></div>
-    <div id="posts"></div>
+    <div class="card post-creation">
+      <h3>Share Your Thoughts</h3>
+      <textarea id="newPost" maxlength="1400" placeholder="What's on your mind? (max 1400 characters)"></textarea>
+      <button onclick="addPost()">Share Post</button>
+    </div>
+    
+    <div class="card feed">
+      <h3 id="feedTitle">Recent Posts</h3>
+      <div class="posts-container">
+        <div id="posts"></div>
+      </div>
+    </div>
   </div>
 </div>
 </body>
